@@ -23,15 +23,12 @@ pub fn part_two(init_freq: Frequency, input: &str) -> io::Result<Frequency> {
         .cycle();
     for change in iter {
         res += change;
-        if seen.contains(&res) {
-            break;
-        }
-        seen.insert(res);
+        if !seen.insert(res) { break; }
     }
     Ok(res)
 }
 
-fn main() -> io::Result<()> {
+fn main() -> Result<(), Box<std::error::Error>> {
     let input_path = String::from("INPUT");
     let input = fs::read_to_string(&input_path)?;
 
